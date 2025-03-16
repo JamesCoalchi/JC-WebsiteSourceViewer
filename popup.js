@@ -30,6 +30,107 @@ document.addEventListener('DOMContentLoaded', () => {
       });
   
       setupEventListeners();
+      
+      // Create secret button using the bottom text
+      const footerText = document.createElement('div');
+      footerText.textContent = 'JamesCoalchi Source Viewer';
+      footerText.style.cssText = `
+        text-align: center;
+        padding: 10px;
+        color: #666;
+        cursor: default;
+        user-select: none;
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background: #f5f5f5;
+      `;
+      
+      let clickCount = 0;
+      let lastClickTime = 0;
+      
+      footerText.addEventListener('click', () => {
+        const now = Date.now();
+        if (now - lastClickTime > 1000) {
+          clickCount = 0;
+        }
+        lastClickTime = now;
+        
+        clickCount++;
+        if (clickCount === 3) {
+          showEasterEgg();
+          clickCount = 0;
+        }
+      });
+      
+      function showEasterEgg() {
+        // Create a modal for the Easter egg
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.8);
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          z-index: 1000;
+        `;
+        
+        // Create YouTube embed
+        const videoContainer = document.createElement('div');
+        videoContainer.style.cssText = `
+          width: 90%;
+          max-width: 450px;
+          position: relative;
+          padding-bottom: 56.25%;
+          height: 0;
+        `;
+        
+        const iframe = document.createElement('iframe');
+        iframe.src = 'https://www.youtube.com/embed/dQw4w9WgXcQ?autoplay=1';
+        iframe.allow = 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture';
+        iframe.allowFullscreen = true;
+        iframe.style.cssText = `
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          border: none;
+          border-radius: 8px;
+        `;
+        
+        videoContainer.appendChild(iframe);
+        
+        // Add a close button
+        const closeButton = document.createElement('button');
+        closeButton.textContent = 'Close';
+        closeButton.style.cssText = `
+          margin-top: 20px;
+          padding: 8px 16px;
+          background-color: var(--primary-color);
+          color: white;
+          border: none;
+          border-radius: 20px;
+          cursor: pointer;
+          font-weight: 500;
+        `;
+        
+        closeButton.addEventListener('click', () => {
+          document.body.removeChild(modal);
+        });
+        
+        modal.appendChild(videoContainer);
+        modal.appendChild(closeButton);
+        document.body.appendChild(modal);
+      }
+      
+      document.body.appendChild(footerText);
     }
   
     function setupEventListeners() {
