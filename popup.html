@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>JamesCoalchi Source Viewer</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="jszip.min.js"></script>
+  <script src="popup.js"></script>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>JamesCoalchi Source Viewer</h1>
+      <div class="url-display" id="current-url">Loading URL...</div>
+    </div>
+    
+    <div class="content">
+      <div class="loading" id="loading">
+        <div class="spinner"></div>
+        <p>Scanning website resources...</p>
+      </div>
+      
+      <div class="file-list-container" id="file-list-container" style="display: none;">
+        <div class="search-bar">
+          <input type="text" id="search-input" placeholder="Search files...">
+        </div>
+        
+        <div class="file-stats">
+          <span id="file-count">0 files found</span>
+          <button id="download-all" class="download-all-btn">Download All</button>
+        </div>
+        
+        <div class="file-categories">
+          <button class="category-btn active" data-category="all">All</button>
+          <button class="category-btn" data-category="html">HTML</button>
+          <button class="category-btn" data-category="css">CSS</button>
+          <button class="category-btn" data-category="js">JavaScript</button>
+          <button class="category-btn" data-category="img">Images</button>
+          <button class="category-btn" data-category="other">Other</button>
+        </div>
+        
+        <div class="file-list" id="file-list"></div>
+      </div>
+      
+      <div class="file-viewer" id="file-viewer" style="display: none;">
+        <div class="file-viewer-header">
+          <button id="back-btn" class="back-btn">Back</button>
+          <h2 id="file-name">File Name</h2>
+          <button id="download-file" class="download-btn">Download</button>
+        </div>
+        <pre id="file-content" class="file-content"></pre>
+      </div>
+    </div>
+    
+    <div class="footer">
+      <p>JamesCoalchi Source Viewer</p>
+    </div>
+  </div>
+</body>
+</html>
